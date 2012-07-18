@@ -221,6 +221,21 @@ def LaunchNucseekWorkflow(accession):
     os.system("java -jar " + path_to_seqware + " -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files nucseek.ini --workflow-accession 66764 --schedule --parent-accessions " + str(accession))
     return
 
+
+def TrimFastq( filepath, sample_name ):
+    path_to_shredder = "/home/sbsuser/lyons/shredder.jar"
+    path_to_read1 = filepath + "/UNALIGNED/Project_DefaultProject/20"+ sample_name + "_L001_R1_001.fastq.gz"
+    path_to_read1_trimmed = filepath + "/UNALIGNED/Project_DefaultProject/20"+ sample_name + "_L001_R1_001.trimmed.fastq.gz"
+    path_to_read2 = filepath + "/UNALIGNED/Project_DefaultProject/20"+ sample_name + "_L001_R2_001.fastq.gz"		# Submit the job for each sample
+    path_to_read2_trimmed = filepath + "/UNALIGNED/Project_DefaultProject/20"+ sample_name + "_L001_R2_001.trimmed.fastq.gz"		# Submit the job for each sample
+    #trim with scala using picard to read/write
+    shredder_cmd = "java -jar %s %s /dev/stdout | gzip -c > %s" % (path_to_shredder, path_to_read1, path_to_read1_trimmed )
+    os.system( shredder_cmd )
+    shredder_cmd = "java -jar %s %s /dev/stdout | gzip -c > %s" % (path_to_shredder, path_to_read2, path_to_read2_trimmed )
+    os.system(shredder_cmd)
+    return path_to_read1_trimmed ,path_to_read2_trimmed 
+
+
 # upload paired end data and associate with accession
 def UploadSampleToNimbus(accession, filepath, sample_name):
     path_to_S3_folder = "s3://newco.uploads/"+sample_name+"/"
