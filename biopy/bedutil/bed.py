@@ -17,6 +17,8 @@ class Bed(object):
         self._start = int(self._tokens[1])
         self._end = int(self._tokens[2])
 
+    def __str__(self):
+        return "%s\t%d\t%d" % (self._contig_name, self._start, self._end)
 
 class CoverageBed(Bed):
 
@@ -31,6 +33,8 @@ class CoverageBed(Bed):
         self._num_bases_covered = int(self._tokens[4])
         self._length_of_entry_in_b = int(self._tokens[5])
         self._frac_of_bases_covered = float(self._tokens[6])
+
+
 
 
 
