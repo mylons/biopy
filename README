@@ -1,1 +1,6 @@
-#base commit to test ssh keys
+
+INSTALL
+
+git clone https://github.com/mylons/biopy.git
+cd biopy
+pip install -e $(pwd)
