@@ -23,6 +23,9 @@ class BedBuilder(object):
     @staticmethod
     def triple_annotated_bed(bed_line):
         return ThreeWayBed(bed_line)
+    @staticmethod
+    def annotated_bed(bed_line):
+        return AnnotatedBed(bed_line)
 
 
 class BedReader(object):
