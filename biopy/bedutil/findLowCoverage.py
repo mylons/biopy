@@ -7,11 +7,11 @@ class FindLowCoverage(object):
         self.depth_max = depth_max
         self._bed_type = bed_type
 
-    def parse_beds(self):
+    def find_beds(self):
         reader = BedReader(self._bed_file, self._bed_type)
         for bed in reader.beds():
             if bed.depth_at_position() < self.depth_max:
-                print str(bed)
+                yield bed
 
 if __name__ == '__main__':
     import argparse
@@ -23,6 +23,7 @@ if __name__ == '__main__':
     bed_type = (args['type'] if args['type'] else 'coverage_depth_bed')
 
     f = FindLowCoverage(args['bed'])
-    f.parse_beds()
+    for b in f.find_beds():
+        print str(b)
 
 
