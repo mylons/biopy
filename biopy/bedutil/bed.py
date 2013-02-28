@@ -37,6 +37,8 @@ class AnnotatedBed(Bed):
 
     def __init__(self, bed_line):
         Bed.__init__(self,bed_line)
+        if len(self._tokens) < 4:
+            raise MalformedBedError( "not enough fields to be a AnnotatedBed: %s" % self._tokens )
         self._annotation = self._tokens[3]
 
     def annotation(self):
@@ -54,7 +56,7 @@ class CoverageDepthBed(AnnotatedBed):
         """
         AnnotatedBed.__init__(self, bed_line)
         if len(self._tokens) < 6:
-            raise MalformedBedError, "not enough fields to be a CoverageBed: %s" % self._tokens
+            raise MalformedBedError( "not enough fields to be a CoverageBed: %s" % self._tokens )
         self._position_in_feature = int(self._tokens[4])
         self._depth_at_position = int(self._tokens[5])
 
