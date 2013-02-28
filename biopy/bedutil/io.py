@@ -33,6 +33,17 @@ class BedReader(object):
             self._file = open(file_name)
             self._make_func = make_bed_func
 
+        def open(self):
+            if self._file.closed:
+                self._file = open(self._file.name)
+
+        def close(self):
+            if not self._file.closed:
+                self._file.close()
+
+        def closed(self):
+            return self._file.closed
+
         def beds(self):
             for bed_line in self._file:
                 if bed_line[0] == '#':
