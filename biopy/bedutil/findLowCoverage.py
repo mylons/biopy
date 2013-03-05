@@ -17,12 +17,13 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='find low coverage positions in coverageBed -d bed file')
     parser.add_argument('-b', '--bed', help='bed file', required=True)
-    parser.add_argument('-t', '--type', help='bed file types supported: [coverage_depth_bed]', )
+    parser.add_argument('-d', '--depth', help='anything less than this depth will be printed, default is <10')
+    parser.add_argument('-t', '--type', help='bed file types supported: [coverage_depth_bed]')
     args = vars(parser.parse_args())
 
     bed_type = (args['type'] if args['type'] else 'coverage_depth_bed')
 
-    f = FindLowCoverage(args['bed'])
+    f = FindLowCoverage(args['bed'], depth_max=int(args['depth']))
     for b in f.find_beds():
         print str(b)
 
