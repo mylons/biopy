@@ -18,7 +18,8 @@ class UniquePosition(object):
 
 if __name__ == '__main__':
     import argparse
-    parser = argparse.ArgumentParser(description='count bases in bed file')
+    parser = argparse.ArgumentParser(description='get features by unique genomic coordinates.'
+                                                 'greedily chooses features.')
     parser.add_argument('-b', '--bed', help='bed file to count', required=True)
     parser.add_argument('-t', '--type', help='bed file types supported: [basic_bed, coverage_depth_bed, annotated_bed]', )
     args = vars(parser.parse_args())
