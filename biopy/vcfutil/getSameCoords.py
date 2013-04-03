@@ -13,9 +13,19 @@ def dictifyVCF(vcfFile):
     return d
 
 def compareDicts(iter, d):
+    union = {}
     for key in iter:
         if key in d:
-            print str(d[key])
+            union[key] = iter[key]
+
+    for key in d:
+        if key in iter and key not in union:
+            union[key] = d[key]
+
+    for key in union:
+        print str(union[key])
+
+
 
 
 if __name__ == '__main__':
