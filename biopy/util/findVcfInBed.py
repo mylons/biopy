@@ -6,15 +6,15 @@ from biopy.bedutil.io import *
 
 #assumes beds are sorted
 def bed_search(beds, pos):
-    def helper(start, stop):
 
-        middle = len(beds) / 2
+    def helper(start, stop):
+        middle = stop / 2
 
         if pos < beds[middle].start():
-            helper(0, middle - 1)
+            helper(start, middle - 1)
 
         elif pos > beds[middle].stop():
-            helper(middle, len(beds))
+            helper(middle, stop)
 
         elif (pos >= beds[middle].start()) and (pos < beds[middle].stop()):
             return beds[middle]

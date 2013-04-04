@@ -1,0 +1,3 @@
+*.pyc
+.idea/
+biopy.egg-info/
