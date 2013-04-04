@@ -26,7 +26,7 @@ class VCF(object):
         return self._chrom
 
     def pos(self):
-        return self._pos
+        return int(self._pos)
 
     def id(self):
         return self._id

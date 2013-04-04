@@ -40,7 +40,7 @@ if __name__ == '__main__':
     parser.add_argument('-v', help='analysis vcf', required=True )
     args = vars(parser.parse_args())
 
-    d = make_vcfs(args['d'])
+    #d = make_vcfs(args['d'])
     v = make_vcfs(args['v'])
-    compare_minor_allele_records(d, v)
+    compare_minor_allele_records(args['d'], v)
 
