@@ -8,7 +8,7 @@ from biopy.bedutil.io import *
 def bed_search(beds, pos):
 
     def helper(start, stop):
-        middle = stop / 2
+        middle = (stop - start) / 2
 
         if stop < start:
             return None
