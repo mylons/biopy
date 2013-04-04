@@ -6,7 +6,7 @@ from biopy.bedutil.io import *
 
 #assumes beds are sorted
 def bed_search(beds, pos):
-    imax = len(beds)
+    imax = len(beds) - 1
     imin = 0
     while imax >= imin:
         imid = (imax + imin) / 2
