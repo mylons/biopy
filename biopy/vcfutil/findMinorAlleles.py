@@ -15,11 +15,22 @@ def make_vcfs(vcf_file):
         vcfs[hash_string(vcf)] = vcf
     return vcfs
 
+def make_vcfs2(vcf_file):
 
-def compare_minor_allele_records(dbsnp, experiment):
-    for key in dbsnp:
-        if key in experiment:
-            print "%s" % str(experiment[key])
+    reader = VCFReader(vcf_file)
+    for vcf in reader.vcfs():
+        yield vcf
+
+
+def compare_minor_allele_records(dbsnp_file, experiment):
+    for vcf in make_vcfs2(dbsnp_file):
+        hsh = hash_string(vcf)
+        if hsh in experiment:
+            print "=================================================================="
+            print vcf
+            print experiment[hsh]
+            print "=================================================================="
+
 
 
 if __name__ == '__main__':
