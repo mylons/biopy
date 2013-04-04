@@ -10,19 +10,18 @@ def bed_search(beds, pos):
     def helper(start, stop):
         middle = stop / 2
 
-        if pos < beds[middle].start():
-            helper(start, middle - 1)
-
-        elif pos > beds[middle].stop():
-            helper(middle, stop)
-
-        elif (pos >= beds[middle].start()) and (pos < beds[middle].stop()):
-            return beds[middle]
-
-        else:
+        if stop < start:
             return None
 
+        elif beds[middle].start() > pos:
+            helper(start, middle - 1)
+        elif beds[middle].stop() < pos:
+            helper(middle+1, stop)
+        else:
+            return beds[middle]
+
     return helper(0, len(beds))
+
 
 def compare_bed_and_vcf(vcf, bed):
     reader = BedReader(bed, BedBuilder.annotated_bed)
