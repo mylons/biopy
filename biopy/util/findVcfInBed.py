@@ -6,21 +6,18 @@ from biopy.bedutil.io import *
 
 #assumes beds are sorted
 def bed_search(beds, pos):
+    imax = len(beds)
+    imin = 0
+    while imax >= imin:
+        imid = (imax + imin) / 2
 
-    def helper(start, stop):
-        middle = (stop + start) / 2
-
-        if stop < start:
-            return None
-
-        elif beds[middle].start() > pos:
-            helper(start, middle - 1)
-        elif beds[middle].end() < pos:
-            helper(middle + 1, stop)
+        if beds[imid].start() < pos and beds[imid].end() < pos:
+            imin = imid + 1
+        elif beds[imid].start() > pos:
+            imax = imid - 1
         else:
-            return beds[middle]
-
-    return helper(0, len(beds))
+            return beds[imid]
+    return None
 
 
 def compare_bed_and_vcf(vcf, bed):
