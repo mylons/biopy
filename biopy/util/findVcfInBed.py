@@ -15,8 +15,8 @@ def bed_search(beds, pos):
 
         elif beds[middle].start() > pos:
             helper(start, middle - 1)
-        elif beds[middle].stop() < pos:
-            helper(middle+1, stop)
+        elif beds[middle].end() < pos:
+            helper(middle + 1, stop)
         else:
             return beds[middle]
 
